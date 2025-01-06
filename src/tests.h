@@ -53,7 +53,7 @@ void fcs_comp_test() {
     Person person2;
     person1.name = "b";
     person2.name = "a";
-    assert(!fcs_cmp(person1, person2) == true);
+    assert(fcs_cmp(person1, person2) == false);
     std::cout << "Person comparator test passed successfully!\n";
 }
 
