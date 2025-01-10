@@ -2,7 +2,7 @@
 #include <fstream>
 #include <random>
 #include <unistd.h>
-#include "sequence/ArraySequence.h"
+#include "../src/sequence/ArraySequence.h"
 #include "Person.h"
 
 #ifndef GENERATORS_H

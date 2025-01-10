@@ -3,7 +3,7 @@
 #include <chrono>
 #include "Person.h"
 #include "generators.h"
-#include "algorithms/ISorter.h"
+#include "ISorter.h"
 
 #ifndef TESTS
 #define TESTS

@@ -1,9 +1,9 @@
 #include<iostream>
 #include <random>
 
-#include"src/Person.h"
-#include"src/UI/UI.h"
-#include"src/tests.h"
+#include"include/Person.h"
+#include"include/UI.h"
+#include"include/tests.h"
 
 int main() {
     UI ui;

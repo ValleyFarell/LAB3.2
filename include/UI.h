@@ -1,7 +1,7 @@
 #include <iostream>
-#include "../sequence/ArraySequence.h"
-#include "../algorithms/ISorter.h"
-#include "../generators.h"
+#include "../src/sequence/ArraySequence.h"
+#include "ISorter.h"
+#include "generators.h"
 #include "viewer.h"
 
 #ifndef UI_H

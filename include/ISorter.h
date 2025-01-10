@@ -2,7 +2,7 @@
 #define SORTS_H
 
 #include <random>
-#include "../sequence/ArraySequence.h"
+#include "../src/sequence/ArraySequence.h"
 
 template<typename T>
 class ISorter {
