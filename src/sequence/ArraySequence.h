@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ARRAY
+#define ARRAY
 #include"DynamicArray.h"
 
 template<class T>
@@ -68,3 +69,4 @@ public:
         return data_[index];
     }
 };
+#endif

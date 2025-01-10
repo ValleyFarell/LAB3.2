@@ -5,8 +5,8 @@
 #include"../generators.h"
 #include"viewer.h"
 
-#ifndef UI
-#define UI
+#ifndef UI_H
+#define UI_H
 
 class UI {
 private:
