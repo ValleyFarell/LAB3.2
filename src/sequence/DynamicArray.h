@@ -1,3 +1,4 @@
+#pragma once
 #ifndef DYN_ARR_H
 #define DYN_ARR_H
 #include <utility>

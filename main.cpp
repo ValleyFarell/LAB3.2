@@ -6,7 +6,7 @@
 #include"src/tests.h"
 
 int main() {
-    // UI ui;
-    // ui.main();
+    UI ui;
+    ui.main();
     run_all_tests();
 }

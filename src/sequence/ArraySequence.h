@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ARRAY
 #define ARRAY
 #include"DynamicArray.h"
