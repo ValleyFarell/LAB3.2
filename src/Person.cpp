@@ -1,4 +1,4 @@
-#include "Person.h"
+#include "../include/Person.h"
 
 bool Person::operator < (const Person& other) const {
     if (surname < other.surname) return 1;

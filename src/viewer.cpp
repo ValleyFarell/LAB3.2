@@ -1,4 +1,4 @@
-#include "viewer.h"
+#include "../include/viewer.h"
 
 void selection_sort(std::vector<int>& arr, sf::RenderWindow& window) {
     size_t n = arr.size();

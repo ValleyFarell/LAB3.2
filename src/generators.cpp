@@ -1,4 +1,4 @@
-#include"generators.h"
+#include"../include/generators.h"
 
 std::string gen_rand_str(const int len) {
     srand((unsigned)time(NULL) * getpid());

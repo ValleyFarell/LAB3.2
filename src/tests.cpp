@@ -1,4 +1,4 @@
-#include "tests.h"
+#include "../include/tests.h"
 
 void sort_test(ISorter<int>& sorter, int size, bool is_random) {
     ArraySequence<int>* array;
