@@ -60,3 +60,44 @@ void run_all_tests() {
     fcs_comp_test();
     std::cout << "All tests are successfully passed!\n\n";
 }
+
+void test_sorting_persons(ISorter<Person>& sorter, int amount) {
+    ArraySequence<Person>* persons = generate_persons(amount);
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    persons = sorter.sort(persons, fcs_cmp);
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = end - start;
+
+    std::cout << "Sorting " << amount << " persons took " << elapsed.count() << " seconds." << std::endl;
+
+    delete persons;
+}
+
+void test_sorting_to_csv(const std::vector<int>& sizes, ISorter<Person>& sorter, const std::string& filename) {
+    std::ofstream csv_file(filename);
+    if (!csv_file.is_open()) {
+        std::cerr << "Не удалось открыть файл для записи." << std::endl;
+        return;
+    }
+
+    csv_file << "Size,Time(s)" << std::endl;
+
+    for (int size : sizes) {
+        ArraySequence<Person>* persons = generate_persons(size);
+
+        auto start = std::chrono::high_resolution_clock::now();
+
+        SelectionSort<Person> sorter;
+        persons = sorter.sort(persons, fcs_cmp);
+
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed = end - start;
+
+        csv_file << size << "," << elapsed.count() << std::endl;
+
+        delete persons;
+    }
+}
