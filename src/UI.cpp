@@ -26,6 +26,12 @@ void UI::main() {
         
         int choice;
         std::cin >> choice;
+        if (!(std::cin >> choice)) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            std::cout << "   Ошибка ввода! Введите число.\n";
+            continue;
+        }
         switch (choice) {
             case 1:
                 array_creation();
