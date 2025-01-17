@@ -19,7 +19,7 @@ plt.ylabel('Time (ms)')
 plt.grid()
 plt.legend()
 plt.xticks(data['Elements'])
-plt.yticks(range(0, 70001, 5000))
+plt.yscale('log')
+plt.savefig('plots/Graphic.png')
 
 plt.show()
-

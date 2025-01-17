@@ -14,14 +14,14 @@ void sort_test(ISorter<int>& sorter, int size, bool is_random) {
     auto end = std::chrono::high_resolution_clock::now();
 
     std::chrono::duration<double, std::milli> duration = end - start;
-    std::cout << typeid(sorter).name() << (is_random ? " (random): " : " (increasing): ") 
+    std::cout << "    " << typeid(sorter).name() << (is_random ? " (random): " : " (increasing): ") 
               << duration.count() << " ms for " << size << " elements." << std::endl;
 
     for (int i = 1; i < size; ++i) {
         assert(array->get(i) >= array->get(i - 1));
     }
 
-    std::cout << typeid(sorter).name() << (is_random ? " (random) test passed successfully!" : " (increasing) test passed successfully!") << std::endl;
+    std::cout << "    " << typeid(sorter).name() << (is_random ? " (random) test passed successfully!" : " (increasing) test passed successfully!") << std::endl;
 }
 
 void quick_sort_test(int size, bool is_random) {
@@ -45,7 +45,7 @@ void fcs_comp_test() {
     person1.name = "b";
     person2.name = "a";
     assert(fcs_cmp(person1, person2) == false);
-    std::cout << "Person comparator test passed successfully!\n";
+    std::cout << "    " <<  "Person comparator test passed successfully!\n";
 }
 
 void run_all_tests() {
@@ -71,33 +71,32 @@ void test_sorting_persons(ISorter<Person>& sorter, int amount) {
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
 
-    std::cout << "Sorting " << amount << " persons took " << elapsed.count() << " seconds." << std::endl;
+    std::cout << "    " << typeid(sorter).name() <<" for " << amount << " persons took " << elapsed.count() << " seconds." << std::endl;
 
     delete persons;
 }
 
-void test_sorting_to_csv(const std::vector<int>& sizes, ISorter<Person>& sorter, const std::string& filename) {
+void test_sorting_to_csv(int amount, int delta, ISorter<int>& sorter, const std::string& filename) {
     std::ofstream csv_file(filename);
     if (!csv_file.is_open()) {
         std::cerr << "Не удалось открыть файл для записи." << std::endl;
         return;
     }
 
-    csv_file << "Size,Time(s)" << std::endl;
+    csv_file << "Elements,Time (ms)" << std::endl;
 
-    for (int size : sizes) {
-        ArraySequence<Person>* persons = generate_persons(size);
+    for (int curr_amount = delta; curr_amount < amount; curr_amount+= delta) {
+        ArraySequence<int>* data = generate_random_integers(curr_amount, -10000, 10000);
 
         auto start = std::chrono::high_resolution_clock::now();
 
-        SelectionSort<Person> sorter;
-        persons = sorter.sort(persons, fcs_cmp);
+        data = sorter.sort(data);
 
         auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> elapsed = end - start;
+        std::chrono::duration<double, std::milli> elapsed = end - start;
 
-        csv_file << size << "," << elapsed.count() << std::endl;
+        csv_file << curr_amount << "," << elapsed.count() << std::endl;
 
-        delete persons;
+        delete data;
     }
 }

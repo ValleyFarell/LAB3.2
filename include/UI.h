@@ -1,4 +1,7 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+
 #include "../src/sequence/ArraySequence.h"
 #include "ISorter.h"
 #include "generators.h"
@@ -18,6 +21,8 @@ private:
 public:
     void main();
     void array_creation();
+    void sort_comparator(int amount, int delta);
+    void print_CSV(const std::string& filename);
 };
 
 #endif // UI_H

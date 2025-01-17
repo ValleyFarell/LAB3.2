@@ -9,7 +9,7 @@
 #define TESTS
 
 void test_sorting_persons(ISorter<Person>& sorter, int amount);
-void test_sorting_to_csv(const std::vector<int>& sizes, ISorter<Person>& sorter, const std::string& filename);
+void test_sorting_to_csv(int amount, int delta, ISorter<int>& sorter, const std::string& filename);
 void sort_test(ISorter<int>& sorter, int size, bool is_random);
 void quick_sort_test(int size, bool is_random);
 void shell_sort_test(int size, bool is_random);

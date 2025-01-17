@@ -1,16 +1,17 @@
 
 #include "../include/UI.h"
-
+#include "../include/tests.h"
 void UI::main() {
     while (true) {
-        std::cout << " Текущий массив: \n";
+        std::cout << " Текущий массив:";
         if (array) {
+            std::cout << "\n";
             for (int i = 0; i < std::min((int)(array->size()), 25); ++i) {
                 std::cout << array->get(i) << " ";
             }
             if (array->size() > 25) std::cout << "...\n";
         } else {
-            std::cout << "Пустой\n";
+            std::cout << " пустой\n";
         }
         std::cout << "\n";
         std::cout << "   1. Создать массив\n";
@@ -20,7 +21,8 @@ void UI::main() {
         std::cout << "   5. Визуализация сортировки выбором\n";
         std::cout << "   6. Визуализация быстрой сортировки\n";
         std::cout << "   7. Визуализация сортировки Шелла\n";
-        std::cout << "   8. Выход\n";
+        std::cout << "   8. Тест сортировок\n";
+        std::cout << "   9. Выход\n";
         
         int choice;
         std::cin >> choice;
@@ -56,6 +58,16 @@ void UI::main() {
                 sort_visualizator(shell_sort);
                 break;
             case 8:
+                int amount, delta;
+                std::cout << "   Введите размер данных: ";
+                std::cin >> amount;
+                std::cout << "   Введите шаг данных: ";
+                std::cin >> delta;
+
+                std::cout << "   Статистика: \n";
+                sort_comparator(amount, delta);
+                break;
+            case 9:
                 exit(0);
                 break;
             default:
@@ -63,6 +75,56 @@ void UI::main() {
                 break;
         }
     }
+}
+
+void UI::sort_comparator(int amount, int delta) {
+    SelectionSort<int> sort1;
+    ShellSort<int> sort2;
+    QuickSort<int> sort3;
+    test_sorting_to_csv(amount, delta, sort1, "./plots/sel_sort/selection_sort_performance.csv");
+    test_sorting_to_csv(amount, delta, sort2, "./plots/shell_sort/shell_sort_performance.csv");
+    test_sorting_to_csv(amount, delta, sort3, "./plots/quick_sort/quick_sort_performance.csv");
+    std::cout << "Selection sort:\n";
+    print_CSV("./plots/sel_sort/selection_sort_performance.csv");
+    std::cout << "\n";
+    std::cout << "\n";
+    std::cout << "Shell sort:\n";
+    print_CSV("./plots/shell_sort/shell_sort_performance.csv");
+    std::cout << "\n";
+    std::cout << "\n";
+    std::cout << "Quick sort:\n";
+    print_CSV("./plots/quick_sort/quick_sort_performance.csv");
+    std::cout << "\n";
+    std::cout << "\n";
+    std::cout << "   График загружен в plots/Graphic.png\n";
+    system("python ./utils/make_plots.py");
+}
+
+void UI::print_CSV(const std::string& filename) {
+    std::ifstream file(filename);
+    
+    if (!file.is_open()) {
+        std::cerr << "Ошибка: не удалось открыть файл " << filename << std::endl;
+        return;
+    }
+
+    std::string line;
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
+        std::string cell;
+        std::vector<std::string> row;
+
+        while (std::getline(ss, cell, ',')) {
+            row.push_back(cell);
+        }
+
+        for (const auto& item : row) {
+            std::cout << "    " << item << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    file.close();
 }
 
 void UI::array_creation() {
