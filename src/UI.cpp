@@ -25,12 +25,18 @@ void UI::main() {
         std::cout << "   9. Выход\n";
         
         int choice;
-        std::cin >> choice;
-        if (!(std::cin >> choice)) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-            std::cout << "   Ошибка ввода! Введите число.\n";
-            continue;
+        while (true) {
+            std::cin >> choice;
+
+            if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "   Ошибка ввода\n";
+            } else if (choice < 1 || choice > 9) {
+                std::cout << "   Ошибка ввода\n";
+            } else {
+                break;
+            }
         }
         switch (choice) {
             case 1:

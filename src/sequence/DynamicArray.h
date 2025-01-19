@@ -59,7 +59,7 @@ public:
         }
     }
     const T& at(size_t index) const {
-        if (index >= size_) {
+        if (index < size_) {
             return data_[index];
         }
         throw "Wrong index! Index must be in range from 0 to size of DynamicArray. ";
